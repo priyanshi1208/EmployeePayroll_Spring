@@ -32,7 +32,7 @@ public class EmployeePayrollController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<ResponseDTO> addEmployeePayroll(@RequestBody EmployeeDTO employeeDto){
+    public ResponseEntity<ResponseDTO> addEmployeePayroll(@Valid @RequestBody EmployeeDTO employeeDto){
         Employee employee = employeePayrollService.addEmployeePayroll(employeeDto);
         return new ResponseEntity<>(new ResponseDTO("Added Employee Payroll Successfully",employee)
                 ,HttpStatus.CREATED);

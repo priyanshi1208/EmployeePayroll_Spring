@@ -1,33 +1,21 @@
 package com.example.employeepayroll.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmployeeDTO {
-    private String name;
-    private long salary;
+    @NotEmpty(message = "Name cannot be Empty")
+    @Pattern(regexp = "^[A-Z][a-zA-Z\\s]{2,}$",message = "Employee name invalid")
+    public String name;
 
-    public EmployeeDTO(){
-    }
-
-    public EmployeeDTO(String name, long salary) {
-        this.name = name;
-        this.salary = salary;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getSalary() {
-        return salary;
-    }
-
-    public void setSalary(long salary) {
-        this.salary = salary;
-    }
-
+    @Min(value = 500,message = "Min wage should be more than 500")
+    public long salary;
     @Override
     public String toString() {
         return "EmployeeDTO{" +
