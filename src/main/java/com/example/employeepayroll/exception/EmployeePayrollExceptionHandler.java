@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 @Slf4j
 @ControllerAdvice
 public class EmployeePayrollExceptionHandler {
-    private  static  final String message="Exception while processing REST Request";
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ResponseDTO> handleMessageNotReadableException(HttpMessageNotReadableException exception){
-        log.error("Invalid date format",exception);
-        ResponseDTO responseDTO=new ResponseDTO(message,"Should have date in the format dd MMM yyyy");
-        return new ResponseEntity<>(responseDTO,HttpStatus.BAD_REQUEST);
-    }
+//    private  static  final String message="Exception while processing REST Request";
+//    @ExceptionHandler(HttpMessageNotReadableException.class)
+//    public ResponseEntity<ResponseDTO> handleMessageNotReadableException(HttpMessageNotReadableException exception){
+//        log.error("Invalid date format",exception);
+//        ResponseDTO responseDTO=new ResponseDTO(message,"Should have date in the format dd MMM yyyy");
+//        return new ResponseEntity<>(responseDTO,HttpStatus.BAD_REQUEST);
+//    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseDTO> handleException(MethodArgumentNotValidException exception){
         List<String> errorList = exception.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).

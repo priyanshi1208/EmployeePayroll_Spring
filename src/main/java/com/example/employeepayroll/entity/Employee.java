@@ -12,36 +12,42 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 @Table(name = "employee_payroll")
 public @Data class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="employee_Id")
+    @Column(name = "employee_id")
     private int employeeId;
-    @Column(name = "name")
     private String name;
     private long salary;
     private String gender;
+    @Column(name = "start_date")
     private LocalDate startDate;
     private String note;
+    @Column(name = "profile_pic")
     private String profilePic;
+
     @ElementCollection
-    @CollectionTable(name="employee_department",joinColumns = @JoinColumn(name = "id"))
-    @Column(name="department")
+    @CollectionTable(name = "employee_department",joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "department")
     private List<String> departments;
 
-    public Employee(EmployeeDTO employeeDTO){
-      this.updateEmployeePayrollData(employeeDTO);
+    public Employee(){
     }
-    public void updateEmployeePayrollData(EmployeeDTO employeeDTO){
+
+    public Employee(EmployeeDTO employeeDTO){
+        this.updateEmployeePayrollData(employeeDTO);
+    }
+
+    public void updateEmployeePayrollData(EmployeeDTO employeeDTO) {
         this.name = employeeDTO.name;
         this.salary = employeeDTO.salary;
-        this.gender=employeeDTO.gender;
-        this.startDate=employeeDTO.startDate;
-        this.note=employeeDTO.note;
-        this.profilePic=employeeDTO.profilePic;
-        this.departments=employeeDTO.department;
+        this.gender = employeeDTO.gender;
+        //this.startDate = employeeDTO.startDate;
+        this.note = employeeDTO.note;
+        this.profilePic = employeeDTO.profilePic;
+        this.departments = employeeDTO.departments;
+
     }
 }
