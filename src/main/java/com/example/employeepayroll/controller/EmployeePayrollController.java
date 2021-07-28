@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 @RestController
 @RequestMapping("/employee")
@@ -25,10 +27,17 @@ public class EmployeePayrollController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<ResponseDTO> getEmployeePayrollById(@PathVariable int id){
+    public ResponseEntity<ResponseDTO> getEmployeePayrollById(@PathVariable("id") int id){
         Employee employee = employeePayrollService.getEmployeePayrollById(id);
         return new ResponseEntity<>(new ResponseDTO("Getting Call for ID Successful",employee)
                 ,HttpStatus.FOUND);
+    }
+    @GetMapping("/department/{department}")
+    public ResponseEntity<ResponseDTO> getEmployeeByDepartment(@PathVariable("department") String department){
+        List<Employee> employeeList=null;
+        employeeList=employeePayrollService.getEmployeesByDepartment(department);
+        return new ResponseEntity<>(new ResponseDTO("Get call for department successful",employeeList),
+                HttpStatus.FOUND);
     }
 
     @PostMapping("/post")
